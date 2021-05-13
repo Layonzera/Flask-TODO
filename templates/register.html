@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Página de Cadastro</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Cadastro</title>
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-    <div class="flex-container">
-        <div class="auth-container">
-            <h1>Login</h1>
-            <form action="/signup" method="POST">
-             <input type="text" name="name" placeholder="Nome">
-                <input type="email" name="email" placeholder="E-mail">
-                <input type="password" name="password" placeholder="Senha">
-                <button type="submit" class="btn bg-blue">Cadastrar</button>
-                <a href="/login" class="text-blue">Login</a>
-            </form>
-        </div>
+  <div class="flex-container">
+    <div class="auth-container">
+      <h1>Cadastro</h1>
+      <form action="/signup" method="POST">
+        <input type="text" name="name" placeholder="Nome">
+        <input type="email" name="email" placeholder="E-mail">
+        <input type="password" name="password" placeholder="Senha">
+        <button type="submit" class="btn bg-blue">Cadastrar</button>
+        <a href="/login" class="text-blue">Login</a>
+      </form>
     </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.7/dist/sweetalert2.all.min.js"></script>
+
+  <script>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for class, message in messages %}
+          Swal.fire({
+            position: 'top-end',
+            icon: '{{ class }}',
+            title: '{{ message }}',
+            showConfirmButton: false,
+            timer: 3000,
+            toast: true
+          })
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </script>
+
 </body>
 </html>
