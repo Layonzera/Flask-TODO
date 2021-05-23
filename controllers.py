@@ -14,7 +14,6 @@ class TodoController():
     if 'user_id' not in session:
       return redirect('/login')
     user_id = session['user_id']
-
     title = request.form.get('title')
     new_todo = Todo(title=title, complete=False, user_id=user_id)
     db.session.add(new_todo)
